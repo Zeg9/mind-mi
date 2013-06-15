@@ -1,0 +1,75 @@
+ores = {}
+ores.add_ore = function(name, description, type,
+                        clust_scarcity, clust_num_ores, clust_size,
+                        height_min, height_max, height_max_2, height_max_3)
+	minetest.register_node("ores:mineral_"..name, {
+		description = description.." ore",
+		tiles = {"ground_stone.png^ores_mineral_"..name..".png"},
+		groups = {cracky=2},
+		drop = "ores:"..name.."_lump",
+		sounds = ground.stone_sounds,
+	})
+	minetest.register_craftitem("ores:"..name.."_lump", {
+		description = description.." lump",
+		inventory_image = "ores_lump_"..name..".png",
+	})
+	minetest.register_ore({
+		ore_type = "scatter",
+		ore = "ores:mineral_"..name,
+		wherein = "ground:stone",
+		clust_scarcity = clust_scarcity,
+		clust_num_ores = clust_num_ores,
+		clust_size = clust_size,
+		height_min = height_min,
+		height_max = height_max,
+		flags = "",
+	})
+	if height_max_2 then
+		minetest.register_ore({
+			ore_type = "scatter",
+			ore = "ores:mineral_"..name,
+			wherein = "ground:stone",
+			clust_scarcity = clust_scarcity*2,
+			clust_num_ores = clust_num_ores,
+			clust_size = clust_size,
+			height_min = height_min,
+			height_max = height_max_2,
+			flags = "",
+		})
+	end
+	if height_max_3 then
+		minetest.register_ore({
+			ore_type = "scatter",
+			ore = "ores:mineral_"..name,
+			wherein = "ground:stone",
+			clust_scarcity = clust_scarcity*3,
+			clust_num_ores = clust_num_ores,
+			clust_size = clust_size,
+			height_min = height_min,
+			height_max = height_max_3,
+			flags = "",
+		})
+	end
+end
+
+ores.add_ore("coal","Coal","coallike", 8*8*8, 8, 3, -31000, 64, -24, -128)
+
+--------------------------
+-- Items made from ores --
+--------------------------
+minetest.register_node("ores:torch", {
+	description = "Torch",
+	tiles = {"ores_torch_top.png","ores_torch_bottom.png","ores_torch.png"},
+	inventory_image = "ores_torch.png",
+	wield_image = "ores_torch.png",
+	drawtype = "nodebox",
+	light_source = 13,
+	groups = {dig_immediate=3},
+	sounds = ground.stone_sounds,
+	node_box = {
+		type = "fixed",
+		fixed = {-1/16, -.5, -1/16, 1/16, 3/16, 1/16},
+	},
+})
+mind_mi.add_particles_emiter("ores:torch","flames",3,{x=0,y=.2,z=0},3.0)
+
