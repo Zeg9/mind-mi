@@ -32,18 +32,19 @@ minetest.register_alias("mapgen_mese", "mapgen_stone")
 -- Sounds --
 ------------
 ground.stone_sounds = {
-	--footstep = <SimpleSoundSpec>,
-	dug = "ground_break_stone",
-	place = "ground_place_stone",
+	footstep = {name="ground_footstep_stone",gain=0.25},
+	dug = {name="ground_break_stone",gain=0.5},
+	place = {name="ground_place_stone",gain=0.5},
 }
 ground.sand_sounds = {
 	footstep = {name="ground_footstep_sand",gain=0.25},
 	dug = "ground_break_sand",
-	place = "ground_place_stone",
+	place = "ground_place_sand",
 }
 ground.dirt_sounds = {
+	footstep = "ground_footstep_dirt",
 	dug = "ground_break_dirt",
-	place = "ground_place_stone",
+	place = "ground_place_dirt",
 }
 
 ----------------------
@@ -58,13 +59,13 @@ minetest.register_node("ground:stone", {
 minetest.register_node("ground:dirt", {
 	description = "Dirt",
 	tiles = {"ground_dirt.png"},
-	groups = {crumbly=3},
+	groups = {crumbly=3,falling_node=1},
 	sounds = ground.dirt_sounds,
 })
 minetest.register_node("ground:dirt_with_grass", {
 	description = "Dirt with grass",
 	tiles = {"ground_grass.png","ground_dirt.png","ground_dirt.png^ground_grass_side.png"},
-	groups = {crumbly=3},
+	groups = {crumbly=3,falling_node=1},
 	drop = "ground:dirt",
 	sounds = ground.dirt_sounds,
 })
