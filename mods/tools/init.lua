@@ -1,9 +1,12 @@
 tools = {}
-tools.add_pick = function(name, desc, material, tool_capabilities)
+tools.add_pick = function(name, desc, material, full_punch_interval, groupcaps_cracky)
 	minetest.register_tool("tools:pick_"..name, {
 		description = desc.." pickaxe",
 		inventory_image = "tools_"..name.."_pick.png",
-		tool_capabilities = tool_capabilities,
+		tool_capabilities = {
+			full_punch_interval = full_punch_interval,
+			groupcaps = { cracky = groupcaps_cracky },
+		},
 	})
 	minetest.register_craft({
 		output = "tools:pick_"..name,
@@ -14,21 +17,37 @@ tools.add_pick = function(name, desc, material, tool_capabilities)
 		},
 	})
 end
+tools.add_shovel = function(name, desc, material, full_punch_interval, groupcaps_crumbly)
+	minetest.register_tool("tools:shovel_"..name, {
+		description = desc.." shovel",
+		inventory_image = "tools_"..name.."_shovel.png",
+		tool_capabilities = {
+			full_punch_interval = full_punch_interval,
+			groupcaps = { crumbly = groupcaps_crumbly },
+		},
+	})
+	minetest.register_craft({
+		output = "tools:shovel_"..name,
+		recipe = {
+			{"", material, ""},
+			{"","trees:stick",""},
+			{"","trees:stick",""},
+		},
+	})
+end
+tools.add_tools = function(name, desc, material, full_punch_interval, groupcaps_cracky, groupcaps_crumbly)
+	tools.add_pick(name, desc, material, full_punch_interval, groupcaps_cracky)
+	tools.add_shovel(name, desc, material, full_punch_interval, groupcaps_crumbly)
+end
 
-tools.add_pick("stone","Stone", "ground:pebble", {
-	full_punch_interval = 1.0,
-	max_drop_level=0,
-	groupcaps={
-		cracky = {times={[3]=2.0}, uses=20, maxlevel=1},
-	},
-})
-tools.add_pick("iron","Iron", "ores:iron_ingot", {
-	full_punch_interval = .7,
-	max_drop_level=0,
-	groupcaps={
-		cracky = {times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1},
-	},
-})
+tools.add_tools("stone","Stone", "ground:pebble", 1.0,
+	{times={[3]=2.0}, uses=20, maxlevel=1}, -- pickaxe
+	{times={[2]=0.8,[3]=0.4}, uses=20, maxlevel=1} -- shovel
+)
+tools.add_tools("iron","Iron", "ores:iron_ingot", 0.7,
+	{times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1}, -- pickaxe
+	{times={[1]=0.8,[2]=0.6,[3]=0.2}, uses=50, maxlevel=1} -- shovel
+)
 
 
 minetest.register_node("tools:torch", {
