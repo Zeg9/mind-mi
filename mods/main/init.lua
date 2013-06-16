@@ -10,9 +10,9 @@ minetest.register_item(":", {
 		groupcaps = {
 		crumbly = {times={[2]=1.00, [3]=0.6}, uses=0, maxlevel=1},
 		snappy = {times={[3]=0.40}, uses=0, maxlevel=1},
-		cracky = {times={[2]=1,[3]=1,[4]=1}, uses=0, maxlevel=1},
+		cracky = {times={[2]=1,[3]=1,[4]=1,[5]=1}, uses=0, maxlevel=1},
 		-- TODO replace the line above ^ by the line below
-		--cracky = {times={[4]=3}, uses=0, maxlevel=1},
+		--cracky = {times={[4]=3,[5]=1}, uses=0, maxlevel=1},
 		oddly_breakable_by_hand = {times={[1]=7.00,[2]=4.00,[3]=1.40}, uses=0, maxlevel=3}
 	},
 	damage_groups = {fleshy=1},

@@ -72,4 +72,11 @@ minetest.register_node("ores:torch", {
 	},
 })
 mind_mi.add_particles_emiter("ores:torch","flames",3,{x=0,y=.2,z=0},3.0)
+minetest.register_craft({
+	output = "ores:torch",
+	recipe = {
+		{"ores:coal_lump"},
+		{"trees:stick"},
+	},
+})
 

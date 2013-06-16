@@ -28,6 +28,29 @@ minetest.register_alias("mapgen_stone_with_coal", "mapgen_stone")
 minetest.register_alias("mapgen_stone_with_iron", "mapgen_stone")
 minetest.register_alias("mapgen_mese", "mapgen_stone")
 
+------------------
+-- On_generated --
+------------------
+
+minetest.register_on_generated(function(minp, maxp, seed)
+	local pr = PseudoRandom(seed+12)
+	-- Generate pebbles
+	local pebbles_count = pr:next(0,100)
+	for i=0,pebbles_count do
+		local p = {}
+		p.x = minp.x+pr:next(0,maxp.x-minp.x)
+		p.z = minp.z+pr:next(0,maxp.z-minp.z)
+		for y=minp.y,maxp.y do
+			p.y = y
+			if minetest.get_node(p).name == "ground:dirt_with_grass" then
+				p.y = p.y +1
+				minetest.set_node(p, {name="ground:pebbles"})
+				break
+			end
+		end
+	end
+end)
+
 ------------
 -- Sounds --
 ------------
@@ -55,6 +78,34 @@ minetest.register_node("ground:stone", {
 	tiles = {"ground_stone.png"},
 	groups = {cracky=3},
 	sounds = ground.stone_sounds,
+})
+minetest.register_node("ground:pebbles", {
+	description = "Pebbles (node)",
+	tiles = {"ground_stone.png"},
+	groups = {cracky=5},
+	sounds = ground.stone_sounds,
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-7/16, -8/16, -2/16, -5/16, -7/16, -1/16},
+			{-5/16, -8/16, 4/16,  -4/16, -7/16, 6/16},
+			{-3/16, -8/16, -3/16, -1/16, -6/16, -1/16},
+			{6/16,  -8/16, -5/16, 8/16,  -7/16, -3/16},
+			{1/16,  -8/16, 2/16,  2/16,  -6/16, 3/16},
+			{3/16,  -8/16, 5/16,  4/16,  -7/16, 6/16},
+		},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {-.5,-.5,-.5,.5,-6/16,.5},
+	},
+	drop = '"ground:pebble" 2',
+})
+minetest.register_craftitem("ground:pebble", {
+	description = "Pebble",
+	inventory_image = "ground_pebble.png",
 })
 minetest.register_node("ground:dirt", {
 	description = "Dirt",
