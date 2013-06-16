@@ -53,30 +53,3 @@ ores.add_ore = function(name, description, type,
 end
 
 ores.add_ore("coal","Coal","coallike", 8*8*8, 8, 3, -31000, 64, -24, -128)
-
---------------------------
--- Items made from ores --
---------------------------
-minetest.register_node("ores:torch", {
-	description = "Torch",
-	tiles = {"ores_torch_top.png","ores_torch_bottom.png","ores_torch.png"},
-	inventory_image = "ores_torch.png",
-	wield_image = "ores_torch.png",
-	drawtype = "nodebox",
-	light_source = 13,
-	groups = {dig_immediate=3},
-	sounds = ground.stone_sounds,
-	node_box = {
-		type = "fixed",
-		fixed = {-1/16, -.5, -1/16, 1/16, 3/16, 1/16},
-	},
-})
-mind_mi.add_particles_emiter("ores:torch","flames",3,{x=0,y=.2,z=0},3.0)
-minetest.register_craft({
-	output = "ores:torch",
-	recipe = {
-		{"ores:coal_lump"},
-		{"trees:stick"},
-	},
-})
-

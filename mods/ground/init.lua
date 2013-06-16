@@ -82,8 +82,9 @@ minetest.register_node("ground:stone", {
 minetest.register_node("ground:pebbles", {
 	description = "Pebbles (node)",
 	tiles = {"ground_stone.png"},
-	groups = {cracky=5},
+	groups = {cracky=4, falling_node=1},
 	sounds = ground.stone_sounds,
+	buildable_to = true,
 	drawtype = "nodebox",
 	paramtype = "light",
 	node_box = {
@@ -135,7 +136,7 @@ minetest.register_node("ground:sand", {
 minetest.register_node("ground:sandstone", {
 	description = "Sandstone",
 	tiles = {"ground_sandstone.png"},
-	groups = {cracky=4},
+	groups = {cracky=3},
 	sounds = ground.stone_sounds,
 })
 minetest.register_node("ground:water_source", {
