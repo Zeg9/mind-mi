@@ -114,6 +114,22 @@ minetest.register_node("ground:cobble", {
 	groups = {cracky=3},
 	sounds = ground.stone_sounds,
 })
+minetest.register_node("ground:mossycobble", {
+	description = "Mossy cobblestone",
+	tiles = {"ground_mossycobble.png"},
+	groups = {cracky=3},
+	sounds = ground.stone_sounds,
+})
+-- cobble will become mossy cobble in presence of water
+minetest.register_abm({
+	nodenames = {"ground:cobble"},
+	neighbors = {"ground:water_source","ground:water_flowing"},
+	interval = 5.0,
+	chance = 10,
+	action = function(pos,...)
+		minetest.set_node(pos,{name="ground:mossycobble"})
+	end,
+})
 minetest.register_craft({
 	output = '"ground:pebble" 9',
 	recipe = {{"ground:stone"}},
