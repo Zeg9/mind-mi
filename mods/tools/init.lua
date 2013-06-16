@@ -22,6 +22,13 @@ tools.add_pick("stone","Stone", "ground:pebble", {
 		cracky = {times={[3]=2.0}, uses=20, maxlevel=1},
 	},
 })
+tools.add_pick("iron","Iron", "ores:iron_ingot", {
+	full_punch_interval = .7,
+	max_drop_level=0,
+	groupcaps={
+		cracky = {times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1},
+	},
+})
 
 
 minetest.register_node("tools:torch", {

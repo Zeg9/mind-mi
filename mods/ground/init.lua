@@ -12,7 +12,7 @@ minetest.register_alias("mapgen_gravel", "ground:gravel")
 minetest.register_alias("mapgen_clay", "ground:sand")
 minetest.register_alias("mapgen_desert_sand", "ground:sand")
 minetest.register_alias("mapgen_desert_stone", "ground:sandstone")
-minetest.register_alias("mapgen_cobble", "ground:stone") --TODO cobble and mossy cobble
+minetest.register_alias("mapgen_cobble", "ground:cobble") --TODO mossy cobble (with abm of course)
 minetest.register_alias("mapgen_mossycobble", "ground:stone")
 minetest.register_alias("mapgen_water_source", "ground:water_source")
 minetest.register_alias("mapgen_lava_source", "ground:lava_source")
@@ -107,6 +107,28 @@ minetest.register_node("ground:pebbles", {
 minetest.register_craftitem("ground:pebble", {
 	description = "Pebble",
 	inventory_image = "ground_pebble.png",
+})
+minetest.register_node("ground:cobble", {
+	description = "Cobblestone",
+	tiles = {"ground_cobble.png"},
+	groups = {cracky=3},
+	sounds = ground.stone_sounds,
+})
+minetest.register_craft({
+	output = '"ground:pebble" 9',
+	recipe = {{"ground:stone"}},
+})
+minetest.register_craft({
+	output = '"ground:pebble" 9',
+	recipe = {{"ground:cobble"}},
+})
+minetest.register_craft({
+	output = "ground:cobble",
+	recipe = {
+		{"ground:pebble","ground:pebble","ground:pebble"},
+		{"ground:pebble","ground:pebble","ground:pebble"},
+		{"ground:pebble","ground:pebble","ground:pebble"},
+	},
 })
 minetest.register_node("ground:dirt", {
 	description = "Dirt",

@@ -1,11 +1,11 @@
 ores = {}
-ores.add_ore = function(name, description, type,
+ores.add_ore = function(name, description, mineral_type,
                         clust_scarcity, clust_num_ores, clust_size,
                         height_min, height_max, height_max_2, height_max_3)
 	minetest.register_node("ores:mineral_"..name, {
 		description = description.." ore",
 		tiles = {"ground_stone.png^ores_mineral_"..name..".png"},
-		groups = {cracky=2},
+		groups = {cracky=3},
 		drop = "ores:"..name.."_lump",
 		sounds = ground.stone_sounds,
 	})
@@ -13,6 +13,17 @@ ores.add_ore = function(name, description, type,
 		description = description.." lump",
 		inventory_image = "ores_lump_"..name..".png",
 	})
+	if mineral_type == "ironlike" then
+		minetest.register_craftitem("ores:"..name.."_ingot", {
+			description = description.." ingot",
+			inventory_image = "ores_ingot_"..name..".png",
+		})
+		minetest.register_craft({
+			type = "cooking",
+			output = "ores:"..name.."_ingot",
+			recipe = "ores:"..name.."_lump",
+		})
+	end
 	minetest.register_ore({
 		ore_type = "scatter",
 		ore = "ores:mineral_"..name,
@@ -52,4 +63,12 @@ ores.add_ore = function(name, description, type,
 	end
 end
 
+-- TODO: copper, tin, silver, gold, chromium?... other metals
 ores.add_ore("coal","Coal","coallike", 8*8*8, 8, 3, -31000, 64, -24, -128)
+ores.add_ore("iron","Iron","ironlike", 9*9*9, 6, 3, -31000, 0, -64, -256)
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "ores:coal_lump",
+	burntime = 40,
+})
