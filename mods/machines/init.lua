@@ -25,7 +25,7 @@ machines.furnace_inactive_formspec =
 
 minetest.register_node("machines:furnace", {
 	description = "Furnace",
-	tiles = {"machines_furnace_top.png", "machines_furnace_bottom.png", "machines_furnace_side.png",
+	tiles = {"ground_stone.png", "ground_stone.png", "machines_furnace_side.png",
 		"machines_furnace_side.png", "machines_furnace_side.png", "machines_furnace_front.png"},
 	paramtype2 = "facedir",
 	groups = {cracky=3},
@@ -93,7 +93,7 @@ minetest.register_node("machines:furnace", {
 
 minetest.register_node("machines:furnace_active", {
 	description = "Furnace",
-	tiles = {"machines_furnace_top.png", "machines_furnace_bottom.png", "machines_furnace_side.png",
+	tiles = {"ground_stone.png", "ground_stone.png", "machines_furnace_side.png",
 		"machines_furnace_side.png", "machines_furnace_side.png", "machines_furnace_front_active.png"},
 	paramtype2 = "facedir",
 	light_source = 8,
@@ -160,6 +160,8 @@ minetest.register_node("machines:furnace_active", {
 		end
 	end,
 })
+
+--TODO particles emiter for furnace, but this would require parsing facedir.
 
 function hacky_swap_node(pos,name)
 	local node = minetest.get_node(pos)
@@ -265,5 +267,14 @@ minetest.register_abm({
 		
 		inv:set_stack("fuel", 1, afterfuel.items[1])
 	end,
+})
+
+minetest.register_craft({
+	output = "machines:furnace",
+	recipe = {
+		{"ground:stone","ground:stone","ground:stone"},
+		{"ground:stone","","ground:stone"},
+		{"ground:stone","ground:stone","ground:stone"},
+	},
 })
 
