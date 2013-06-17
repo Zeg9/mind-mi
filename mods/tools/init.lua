@@ -63,7 +63,7 @@ end
 tools.add_tools("stone","Stone", "ground:pebble", 1.0,
 	{times={[3]=2.0}, uses=20, maxlevel=1}, -- pickaxe
 	{times={[2]=0.8,[3]=0.4}, uses=20, maxlevel=1}, -- shovel
-	{times={[3]=2.0}, uses=20, maxlevel=1} -- axe
+	{times={[2]=2.0,[3]=2.0}, uses=20, maxlevel=1} -- axe
 )
 tools.add_tools("iron","Iron", "ores:iron_ingot", 0.7,
 	{times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1}, -- pickaxe
