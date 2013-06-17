@@ -63,9 +63,12 @@ ores.add_ore = function(name, description, mineral_type,
 	end
 end
 
--- TODO: copper, tin, silver, gold, chromium?... other metals
+-- TODO: silver, chromium?... other metals
 ores.add_ore("coal","Coal","coallike", 8*8*8, 8, 3, -31000, 64, -24, -128)
 ores.add_ore("iron","Iron","ironlike", 9*9*9, 6, 3, -31000, 0, -64, -256)
+ores.add_ore("tin","Tin","ironlike", 8*8*8, 4, 2, -31000, 0, -64, -256)
+ores.add_ore("copper","Copper","ironlike", 9*9*9, 15, 3, -31000, 0, -64, -256)
+ores.add_ore("gold","Gold","ironlike", 10*10*10, 8, 3, -31000, -24, -128, -512)
 
 minetest.register_craft({
 	type = "fuel",
