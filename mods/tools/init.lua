@@ -35,18 +35,40 @@ tools.add_shovel = function(name, desc, material, full_punch_interval, groupcaps
 		},
 	})
 end
-tools.add_tools = function(name, desc, material, full_punch_interval, groupcaps_cracky, groupcaps_crumbly)
+tools.add_axe = function(name, desc, material, full_punch_interval, groupcaps_choppy)
+	minetest.register_tool("tools:axe_"..name, {
+		description = desc.." axe",
+		inventory_image = "tools_"..name.."_axe.png",
+		tool_capabilities = {
+			full_punch_interval = full_punch_interval,
+			groupcaps = { choppy = groupcaps_choppy },
+		},
+	})
+	minetest.register_craft({
+		output = "tools:axe_"..name,
+		recipe = {
+			{material, material, ""},
+			{material,"trees:stick",""},
+			{"","trees:stick",""},
+		},
+	})
+end
+tools.add_tools = function(name, desc, material, full_punch_interval,
+                           groupcaps_cracky, groupcaps_crumbly, groupcaps_choppy)
 	tools.add_pick(name, desc, material, full_punch_interval, groupcaps_cracky)
 	tools.add_shovel(name, desc, material, full_punch_interval, groupcaps_crumbly)
+	tools.add_axe(name, desc, material, full_punch_interval, groupcaps_choppy)
 end
 
 tools.add_tools("stone","Stone", "ground:pebble", 1.0,
 	{times={[3]=2.0}, uses=20, maxlevel=1}, -- pickaxe
-	{times={[2]=0.8,[3]=0.4}, uses=20, maxlevel=1} -- shovel
+	{times={[2]=0.8,[3]=0.4}, uses=20, maxlevel=1}, -- shovel
+	{times={[3]=2.0}, uses=20, maxlevel=1} -- axe
 )
 tools.add_tools("iron","Iron", "ores:iron_ingot", 0.7,
 	{times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1}, -- pickaxe
-	{times={[1]=0.8,[2]=0.6,[3]=0.2}, uses=50, maxlevel=1} -- shovel
+	{times={[1]=0.8,[2]=0.6,[3]=0.2}, uses=50, maxlevel=1}, -- shovel
+	{times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1} -- axe
 )
 
 
