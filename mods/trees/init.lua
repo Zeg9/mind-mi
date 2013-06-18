@@ -38,6 +38,12 @@ trees.register_tree = function(name, description, definition)
 		},
 		groups = {choppy=2},
 	})
+	minetest.register_craft({
+		type = "fuel",
+		recipe = "trees:"..name.."_trunk",
+		burntime = 25,
+	})
+	--TODO: add wooden planks and crafting sticks from trunks.
 	minetest.register_node("trees:"..name.."_leaves", {
 		description = description.." leaves",
 		drawtype = "allfaces_optional",

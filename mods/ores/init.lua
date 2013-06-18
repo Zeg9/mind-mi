@@ -73,5 +73,5 @@ ores.add_ore("gold","Gold","ironlike", 10*10*10, 8, 3, -31000, -24, -128, -512)
 minetest.register_craft({
 	type = "fuel",
 	recipe = "ores:coal_lump",
-	burntime = 40,
+	burntime = 25,
 })
