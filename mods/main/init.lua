@@ -30,6 +30,19 @@ mind_mi.add_particles_emiter = function(nodename, particle, count, relpos, size)
 		chance = 1,
 		action = function(pos, node, ...)
 			local ppos = pos_add(pos, relpos)
+			if minetest.registered_nodes[nodename].paramtype2 == "wallmounted" then
+				if node.param2 == 0 then
+				elseif node.param2 == 1 then
+				elseif node.param2 == 2 then
+					ppos = pos_add(ppos, {x=.45,y=0,z=0})
+				elseif node.param2 == 3 then
+					ppos = pos_add(ppos, {x=-.45,y=0,z=0})
+				elseif node.param2 == 4 then
+					ppos = pos_add(ppos, {x=0,y=0,z=.45})
+				elseif node.param2 == 5 then
+					ppos = pos_add(ppos, {x=0,y=0,z=-.45})
+				end
+			end
 			minetest.add_particlespawner(count, 5.0,
 				ppos, ppos,
 				{x=-.05,y=0,z=-.05}, {x=.05,y=.1,z=.05},

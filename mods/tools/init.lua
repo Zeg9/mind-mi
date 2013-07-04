@@ -74,23 +74,62 @@ tools.add_tools("iron","Iron", "ores:iron_ingot", 0.7,
 
 minetest.register_node("tools:torch", {
 	description = "Torch",
-	tiles = {"tools_torch_top.png","tools_torch_bottom.png","tools_torch.png"},
+	tiles = {"tools_torch_top.png","tools_torch_bottom.png","tools_torch_side.png"},
 	inventory_image = "tools_torch.png",
 	wield_image = "tools_torch.png",
 	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
 	light_source = 13,
-	groups = {dig_immediate=3},
+	groups = {dig_immediate=3,attached_node=1},
 	sounds = ground.stone_sounds,
+	after_destruct = function(pos, oldnode)
+		print("destructed a torch, param2 = "..oldnode.param2)
+	end,
 	node_box = {
-		type = "fixed",
-		fixed = {-1/16, -.5, -1/16, 1/16, 3/16, 1/16},
+		type = "wallmounted",
+		wall_bottom = {-1/16, -.5, -1/16, 1/16, 3/16, 1/16},
+		wall_top = {-1/16, 1/16, -1/16, 1/16, .5, 1/16},
+		wall_side = {-.5, -.5, -1/16, -6/16, 3/16, 1/16},
 	},
 })
 mind_mi.add_particles_emiter("tools:torch","flames",3,{x=0,y=.2,z=0},3.0)
 minetest.register_craft({
-	output = "tools:torch",
+	output = '"tools:torch" 2',
 	recipe = {
-		{"ores:coal_lump"},
+		{"group:coal"},
 		{"trees:stick"},
+	},
+})
+
+minetest.register_tool("tools:bucket", {
+	description = "Bucket",
+	inventory_image = "tools_bucket.png",
+	liquids_pointable = true,
+	on_use = function(itemstack, user, pointed_thing)
+		if pointed_thing.type ~= "node" then return end
+		if minetest.get_node(pointed_thing.under).name == "ground:water_source" then
+			minetest.remove_node(pointed_thing.under)
+			return ItemStack("tools:bucket_water")
+		end
+	end,
+})
+minetest.register_tool("tools:bucket_water", {
+	description = "Water Bucket",
+	inventory_image = "tools_bucket_water.png",
+	liquids_pointable = true,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type ~= "node" then return end
+		if minetest.get_node(pointed_thing.above).name == "air" then
+			minetest.set_node(pointed_thing.above,{name="ground:water_source"})
+			return ItemStack("tools:bucket")
+		end
+	end,
+})
+minetest.register_craft({
+	output = "tools:bucket",
+	recipe = {
+		{"ores:iron_ingot","","ores:iron_ingot"},
+		{"","ores:iron_ingot",""},
 	},
 })

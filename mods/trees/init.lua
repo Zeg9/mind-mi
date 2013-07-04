@@ -12,6 +12,12 @@ minetest.register_node("trees:dirt_with_grass_roots", {
 	groups = {},
 })
 
+minetest.register_craftitem("trees:charcoal", {
+	description = "Charcoal",
+	inventory_image = "trees_charcoal.png",
+	groups = {coal=1},
+})
+
 minetest.register_craftitem("trees:stick", {
 	description = "Stick",
 	inventory_image = "trees_stick.png",
@@ -42,6 +48,11 @@ trees.register_tree = function(name, description, definition)
 		type = "fuel",
 		recipe = "trees:"..name.."_trunk",
 		burntime = 25,
+	})
+	minetest.register_craft({
+		type = "cooking",
+		output = "trees:charcoal",
+		recipe = "trees:"..name.."_trunk",
 	})
 	--TODO: add wooden planks and crafting sticks from trunks.
 	minetest.register_node("trees:"..name.."_leaves", {

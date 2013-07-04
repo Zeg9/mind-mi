@@ -55,17 +55,17 @@ end)
 -- Sounds --
 ------------
 ground.stone_sounds = {
-	footstep = {name="ground_footstep_stone",gain=0.25},
+	footstep = {name="ground_break_stone",gain=0.125},
 	dug = {name="ground_break_stone",gain=0.5},
 	place = {name="ground_place_stone",gain=0.5},
 }
 ground.sand_sounds = {
 	footstep = {name="ground_footstep_sand",gain=0.25},
-	dug = "ground_break_sand",
+	dug = "ground_break_dirt",
 	place = "ground_place_sand",
 }
 ground.dirt_sounds = {
-	footstep = "ground_footstep_dirt",
+	footstep = {name="ground_break_dirt",gain=0.25},
 	dug = "ground_break_dirt",
 	place = "ground_place_dirt",
 }
