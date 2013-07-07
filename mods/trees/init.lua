@@ -85,8 +85,10 @@ trees.register_tree = function(name, description, definition)
 	-- Sapling grow
 	minetest.register_abm({
 		nodenames = {"trees:"..name.."_sapling"},
-		interval = 5.0,
-		chance = 4,
+		--interval = 5.0,
+		--chance = 4,
+		interval = 1.0,
+		chance = 1,
 		action = function(pos, node, ...)
 			pos.y = pos.y -1
 			trees.grow_tree(pos, name, true)
@@ -170,6 +172,16 @@ trees.register_tree("appletree", "Apple tree", {
 })
 trees.register_tree("oak", "Oak", {
 	axiom="&[GT]+[GT]+[GT]+[GT]+^TTTT[TTT]AFAFAGGB",
+	rules_a="&[GFF]+[GFF]+[GFF]+[GFF]+^", -- branches
+	rules_b="[&f+f+ff+ff+ff+f]", -- top leaves
+	angle=90,
+	iterations=2,
+	random_level=0,
+	trunk_type="single",
+	thin_branches=true,
+})
+trees.register_tree("birch", "Birch", {
+	axiom="&[GT]+[GT]+[GT]+[GT]+^TTTT[T]BTT[TTT]AFAFAGGB",
 	rules_a="&[GFF]+[GFF]+[GFF]+[GFF]+^", -- branches
 	rules_b="[&f+f+ff+ff+ff+f]", -- top leaves
 	angle=90,
