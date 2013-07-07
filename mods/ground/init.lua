@@ -158,6 +158,22 @@ minetest.register_node("ground:sandstone", {
 	groups = {cracky=3},
 	sounds = mind_mi.stone_sounds,
 })
+minetest.register_node("ground:darkstone", {
+	description = "Darkstone",
+	tiles = {"ground_darkstone.png"},
+	groups = {cracky=1},
+	sounds = mind_mi.stone_sounds,
+})
+minetest.register_ore({
+	ore_type = "scatter",
+	ore = "ground:darkstone",
+	wherein = "ground:stone",
+	clust_scarcity = 50*50*50,
+	clust_num_ores = 100,
+	clust_size = 6,
+	height_min = -31000,
+	height_max = -200,
+})
 minetest.register_node("ground:water_source", {
 	description = "Water",
 	tiles = {

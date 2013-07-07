@@ -17,6 +17,11 @@ minetest.register_item(":", {
 	}
 })
 
+minetest.register_node("main:glowing_air", {
+	drawtype = "airlike",
+	light_source = 14,
+})
+
 local pos_add = function(pos1, pos2)
 	return {x=pos1.x+pos2.x, y=pos1.y+pos2.y, z=pos1.z+pos2.z}
 end
