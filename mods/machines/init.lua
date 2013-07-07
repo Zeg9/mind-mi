@@ -1,5 +1,4 @@
 -- Furnace code mostly borrowed from minetest_game
--- Maybe I'm going to write one from scratch, I tried once but abandoned...
 
 machines = {}
 
@@ -30,7 +29,7 @@ minetest.register_node("machines:furnace", {
 	paramtype2 = "facedir",
 	groups = {cracky=3},
 	legacy_facedir_simple = true,
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", machines.furnace_inactive_formspec)
@@ -100,7 +99,7 @@ minetest.register_node("machines:furnace_active", {
 	drop = "machines:furnace",
 	groups = {cracky=3},
 	legacy_facedir_simple = true,
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", machines.furnace_inactive_formspec)

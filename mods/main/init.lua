@@ -63,7 +63,7 @@ mind_mi.stone_sounds = {
 	place = {name="default_place_node_hard", gain=1.0},
 }
 mind_mi.dirt_sounds = {
-	footstep = {name="default_dirt_footstep", gain=1.0},
+	footstep = {name="default_dirt_footstep", gain=.5},
 	dug = {name="default_dirt_footstep", gain=2.0},
 	place = {name="default_place_node", gain=1.0},
 }
@@ -86,4 +86,10 @@ mind_mi.wood_sounds = {
 	footstep = {name="default_wood_footstep", gain=0.5},
 	dug = {name="default_wood_footstep", gain=1.0},
 	place = {name="default_place_node_hard", gain=1.0},
+}
+mind_mi.leaves_sounds = {
+	footstep = {name="default_grass_footstep", gain=0.35},
+	dug = {name="default_grass_footstep", gain=0.85},
+	dig = {name="default_dig_crumbly", gain=0.4},
+	place = {name="default_place_node", gain=1.0},
 }

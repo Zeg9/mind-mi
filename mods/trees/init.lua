@@ -62,25 +62,58 @@ trees.register_tree = function(name, description, definition)
 				{items = {"trees:"..name.."_leaves"}}
 			}
 		},
+		walkable = false,
+		climbable = true,
 		groups = {snappy=3},
-		sounds = mind_mi.dirt_sounds,
+		sounds = mind_mi.leaves_sounds,
 	})
 	minetest.register_node("trees:"..name.."_sapling", {
 		description = description.." sapling",
 		drawtype = "plantlike",
 		tiles = {"trees_"..name.."_sapling.png"},
+		inventory_image = "trees_"..name.."_sapling.png",
+		wield_image = "trees_"..name.."_sapling.png",
 		paramtype = "light",
+		walkable = false,
+		selection_box = {
+			type = "fixed",
+			fixed = {-.35,-.5,-.35,.35,.5,.35},
+		},
 		groups = {dig_immediate=3},
 		sounds = mind_mi.wood_sounds,
 	})
+	-- Sapling grow
 	minetest.register_abm({
 		nodenames = {"trees:"..name.."_sapling"},
-		-- FIXME change interval and/or chance
-		interval = 1.0,
-		chance = 1,
+		interval = 5.0,
+		chance = 4,
 		action = function(pos, node, ...)
 			pos.y = pos.y -1
 			trees.grow_tree(pos, name, true)
+		end,
+	})
+	-- Leaf decay
+	-- FIXME: hard-coded leafdecay radius
+	minetest.register_abm({
+		nodenames = {"trees:"..name.."_leaves"},
+		interval = 1.0,
+		chance = 10,
+		action = function(pos, node, ...)
+			if minetest.find_node_near(pos, 5, "trees:"..name.."_trunk") == nil then
+				itemstacks = minetest.get_node_drops(node.name)
+				for _, itemname in ipairs(itemstacks) do
+					-- only drop saplings
+					if itemname == "trees:"..name.."_sapling" then
+						local p_drop = {
+							x = pos.x - 0.5 + math.random(),
+							y = pos.y - 0.5 + math.random(),
+							z = pos.z - 0.5 + math.random(),
+						}
+						minetest.add_item(p_drop, itemname)
+					end
+				end
+				minetest.remove_node(pos)
+			end
 		end,
 	})
 end
@@ -118,8 +151,9 @@ minetest.register_node("trees:apple", {
 		fixed = {-5/16, -5/16, -5/16, 5/16, 5/16, 5/16}
 	},
 	paramtype="light",
+	walkable = false,
 	groups={dig_immediate=3},
-	sounds = mind_mi.dirt_sounds,
+	sounds = mind_mi.leaves_sounds,
 	on_use = minetest.item_eat(4),
 })
 trees.register_tree("appletree", "Apple tree", {

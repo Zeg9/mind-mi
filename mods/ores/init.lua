@@ -8,7 +8,7 @@ ores.add_ore = function(name, description, mineral_type,
 		tiles = {"ground_stone.png^ores_mineral_"..name..".png"},
 		groups = {cracky=3},
 		drop = "ores:"..name.."_lump",
-		sounds = ground.stone_sounds,
+		sounds = mind_mi.stone_sounds,
 	})
 	minetest.register_craftitem("ores:"..name.."_lump", {
 		description = description.." lump",
