@@ -2,15 +2,8 @@ trees = {}
 trees.definitions = {}
 trees.max = 0
 
-minetest.register_node("trees:dirt_with_grass_roots", {
-	description = "Dirt with grass and roots",
-	tiles = {
-		"ground_grass.png",
-		"trees_dirt_roots.png",
-		"trees_dirt_roots.png^ground_grass_side.png",
-	},
-	groups = {},
-})
+-- Old versions had roots
+minetest.register_alias("trees:dirt_with_grass_roots", "ground:dirt_with_grass")
 
 minetest.register_craftitem("trees:charcoal", {
 	description = "Charcoal",
@@ -43,6 +36,7 @@ trees.register_tree = function(name, description, definition)
 			fixed = {-7/16,-0.5,-7/16,7/16,0.5,7/16},
 		},
 		groups = {choppy=2},
+		sounds = mind_mi.wood_sounds,
 	})
 	minetest.register_craft({
 		type = "fuel",
@@ -69,7 +63,7 @@ trees.register_tree = function(name, description, definition)
 			}
 		},
 		groups = {snappy=3},
-		sounds = ground.dirt_sounds,
+		sounds = mind_mi.dirt_sounds,
 	})
 	minetest.register_node("trees:"..name.."_sapling", {
 		description = description.." sapling",
@@ -77,6 +71,7 @@ trees.register_tree = function(name, description, definition)
 		tiles = {"trees_"..name.."_sapling.png"},
 		paramtype = "light",
 		groups = {dig_immediate=3},
+		sounds = mind_mi.wood_sounds,
 	})
 	minetest.register_abm({
 		nodenames = {"trees:"..name.."_sapling"},
@@ -93,7 +88,7 @@ end
 trees.grow_tree = function(pos, name, is_sapling)
 	-- TODO maybe allow multiple nodes ? (group:soil?)
 	if minetest.get_node(pos).name == "ground:dirt_with_grass" and
-	   minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then
+	   (is_sapling or minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air") then
 		minetest.set_node(pos, {name="trees:dirt_with_grass_roots"})
 		pos.y = pos.y +1
 		if is_sapling then
@@ -124,7 +119,7 @@ minetest.register_node("trees:apple", {
 	},
 	paramtype="light",
 	groups={dig_immediate=3},
-	sounds = ground.dirt_sounds,
+	sounds = mind_mi.dirt_sounds,
 	on_use = minetest.item_eat(4),
 })
 trees.register_tree("appletree", "Apple tree", {

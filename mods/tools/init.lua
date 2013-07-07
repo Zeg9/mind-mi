@@ -82,10 +82,7 @@ minetest.register_node("tools:torch", {
 	paramtype2 = "wallmounted",
 	light_source = 13,
 	groups = {dig_immediate=3,attached_node=1},
-	sounds = ground.stone_sounds,
-	after_destruct = function(pos, oldnode)
-		print("destructed a torch, param2 = "..oldnode.param2)
-	end,
+	sounds = mind_mi.wood_sounds,
 	node_box = {
 		type = "wallmounted",
 		wall_bottom = {-1/16, -.5, -1/16, 1/16, 3/16, 1/16},

@@ -51,25 +51,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end
 end)
 
-------------
--- Sounds --
-------------
-ground.stone_sounds = {
-	footstep = {name="ground_break_stone",gain=0.125},
-	dug = {name="ground_break_stone",gain=0.5},
-	place = {name="ground_place_stone",gain=0.5},
-}
-ground.sand_sounds = {
-	footstep = {name="ground_footstep_sand",gain=0.25},
-	dug = "ground_break_dirt",
-	place = "ground_place_sand",
-}
-ground.dirt_sounds = {
-	footstep = {name="ground_break_dirt",gain=0.25},
-	dug = "ground_break_dirt",
-	place = "ground_place_dirt",
-}
-
 ----------------------
 -- Node definitions --
 ----------------------
@@ -77,13 +58,13 @@ minetest.register_node("ground:stone", {
 	description = "Stone",
 	tiles = {"ground_stone.png"},
 	groups = {cracky=3},
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 })
 minetest.register_node("ground:pebbles", {
 	description = "Pebbles (node)",
 	tiles = {"ground_stone.png"},
 	groups = {cracky=4, falling_node=1},
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 	buildable_to = true,
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -112,13 +93,13 @@ minetest.register_node("ground:cobble", {
 	description = "Cobblestone",
 	tiles = {"ground_cobble.png"},
 	groups = {cracky=3},
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 })
 minetest.register_node("ground:mossycobble", {
 	description = "Mossy cobblestone",
 	tiles = {"ground_mossycobble.png"},
 	groups = {cracky=3},
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 })
 -- cobble will become mossy cobble in presence of water
 minetest.register_abm({
@@ -150,32 +131,32 @@ minetest.register_node("ground:dirt", {
 	description = "Dirt",
 	tiles = {"ground_dirt.png"},
 	groups = {crumbly=3,falling_node=1},
-	sounds = ground.dirt_sounds,
+	sounds = mind_mi.dirt_sounds,
 })
 minetest.register_node("ground:dirt_with_grass", {
 	description = "Dirt with grass",
 	tiles = {"ground_grass.png","ground_dirt.png","ground_dirt.png^ground_grass_side.png"},
 	groups = {crumbly=3,falling_node=1},
 	drop = "ground:dirt",
-	sounds = ground.dirt_sounds,
+	sounds = mind_mi.grass_sounds,
 })
 minetest.register_node("ground:gravel", {
 	description = "Gravel",
 	tiles = {"ground_gravel.png"},
 	groups = {crumbly=2,falling_node=1},
-	sounds = ground.sand_sounds,
+	sounds = mind_mi.gravel_sounds,
 })
 minetest.register_node("ground:sand", {
 	description = "Sand",
 	tiles = {"ground_sand.png"},
 	groups = {crumbly=3,falling_node=1},
-	sounds = ground.sand_sounds,
+	sounds = mind_mi.sand_sounds,
 })
 minetest.register_node("ground:sandstone", {
 	description = "Sandstone",
 	tiles = {"ground_sandstone.png"},
 	groups = {cracky=3},
-	sounds = ground.stone_sounds,
+	sounds = mind_mi.stone_sounds,
 })
 minetest.register_node("ground:water_source", {
 	description = "Water",
