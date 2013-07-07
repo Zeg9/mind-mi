@@ -63,12 +63,17 @@ end
 tools.add_tools("stone","Stone", "ground:pebble", 1.0,
 	{times={[3]=2.0}, uses=20, maxlevel=1}, -- pickaxe
 	{times={[2]=0.8,[3]=0.4}, uses=20, maxlevel=1}, -- shovel
-	{times={[2]=2.0,[3]=2.0}, uses=20, maxlevel=1} -- axe
+	{times={[2]=2.0,[3]=1.5}, uses=20, maxlevel=1} -- axe
 )
 tools.add_tools("iron","Iron", "ores:iron_ingot", 0.7,
-	{times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1}, -- pickaxe
+	{times={[2]=1.5,[3]=1.0}, uses=50, maxlevel=1}, -- pickaxe
 	{times={[1]=0.8,[2]=0.6,[3]=0.2}, uses=50, maxlevel=1}, -- shovel
-	{times={[2]=0.8,[3]=1.0}, uses=50, maxlevel=1} -- axe
+	{times={[2]=1.5,[3]=1.0}, uses=50, maxlevel=1} -- axe
+)
+tools.add_tools("diamond_iron","Diamond and Iron", "ores:diamond_iron_ingot", 0.5,
+	{times={[1]=3.0,[2]=1.0,[3]=0.5}, uses=100, maxlevel=1}, -- pickaxe
+	{times={[1]=0.4,[2]=0.3,[3]=0.1}, uses=100, maxlevel=1}, -- shovel
+	{times={[1]=1.0,[2]=0.6,[3]=0.5}, uses=100, maxlevel=1} -- axe
 )
 
 
