@@ -160,12 +160,21 @@ minetest.register_node("ground:sandstone", {
 })
 minetest.register_node("ground:water_source", {
 	description = "Water",
-	tiles = {"ground_water.png"},
-	special_tiles = {"ground_water.png"},
+	tiles = {
+		{name="ground_water_source_animated.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0}}
+	},
+	special_tiles = {
+		-- New-style water source material (mostly unused)
+		{
+			name="ground_water_source_animated.png",
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=2.0},
+			backface_culling = false,
+		}
+	},
 	paramtype = "light",
 	drawtype = "liquid",
 	liquidtype = "source",
-	alpha = 100,
+	alpha = 160,
 	walkable = false,
 	pointable = false,
 	diggable = false,
@@ -178,11 +187,22 @@ minetest.register_node("ground:water_source", {
 minetest.register_node("ground:water_flowing", {
 	description = "Flowing water",
 	tiles = {"ground_water.png"},
-	special_tiles = {"ground_water.png","ground_water.png"},
+	special_tiles = {
+		{
+			image="ground_water_flowing_animated.png",
+			backface_culling=false,
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=0.8}
+		},
+		{
+			image="ground_water_flowing_animated.png",
+			backface_culling=true,
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=0.8}
+		},
+	},
 	paramtype = "light",
 	drawtype = "flowingliquid",
 	liquidtype = "flowing",
-	alpha = 100,
+	alpha = 160,
 	walkable = false,
 	pointable = false,
 	diggable = false,

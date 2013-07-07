@@ -13,7 +13,7 @@ GloopMaster (CC BY-SA):
 Calinou (CC BY-SA):
   ores_ingot_copper.png
   ores_lump_copper.png
-HybridDog (CC BY-SA):
+HybridDog (HybridTP) (CC BY-SA):
   ores_mineral_copper.png
   ores_mineral_gold.png
   ores_mineral_tin.png
