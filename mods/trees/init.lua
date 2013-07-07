@@ -85,10 +85,8 @@ trees.register_tree = function(name, description, definition)
 	-- Sapling grow
 	minetest.register_abm({
 		nodenames = {"trees:"..name.."_sapling"},
-		--interval = 5.0,
-		--chance = 4,
-		interval = 1.0,
-		chance = 1,
+		interval = 5.0,
+		chance = 4,
 		action = function(pos, node, ...)
 			pos.y = pos.y -1
 			trees.grow_tree(pos, name, true)
