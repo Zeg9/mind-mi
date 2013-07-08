@@ -16,3 +16,11 @@ Cisoun's texture pack (WTFPL):
 RealBadAngel's animated water (WTFPL):
   ground_water_source_animated.png
   ground_water_flowing_animated.png
+celeron55 (CC BY-SA):
+  ground_clay.png
+GloopMaster (CC BY-SA):
+  ground_clay_lump.png
+Calinou (CC BY-SA):
+  default_brick.png
+  default_clay_brick.png
+

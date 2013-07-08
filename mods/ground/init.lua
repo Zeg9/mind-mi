@@ -152,13 +152,63 @@ minetest.register_node("ground:sand", {
 	groups = {crumbly=3,falling_node=1},
 	sounds = mind_mi.sand_sounds,
 })
+minetest.register_node("ground:clay", {
+	description = "Clay block",
+	tiles = {"ground_clay.png"},
+	drop = "ground:clay_lump 4",
+	groups = {crumbly=3, falling_node=1},
+	sounds = mind_mi.dirt_sounds,
+})
+minetest.register_node("ground:brick", {
+	description = "Brick block",
+	tiles = {"ground_brick.png"},
+	groups = {crumbly=3},
+	sounds = mind_mi.stone_sounds,
+})
+minetest.register_craftitem("ground:clay_lump", {
+	description = "Clay lump",
+	inventory_image = "ground_clay_lump.png",
+})
+minetest.register_craftitem("ground:clay_brick", {
+	description = "Clay brick",
+	inventory_image = "ground_clay_brick.png",
+})
+minetest.register_craft({
+	type = "cooking",
+	output = "ground:clay_brick",
+	recipe = "ground:clay_lump",
+})
+minetest.register_craft({
+	output = "ground:clay",
+	recipe = {
+		{"ground:clay_lump","ground:clay_lump"},
+		{"ground:clay_lump","ground:clay_lump"},
+	},
+})
+minetest.register_craft({
+	output = "ground:brick",
+	recipe = {
+		{"ground:clay_brick","ground:clay_brick"},
+		{"ground:clay_brick","ground:clay_brick"},
+	},
+})
+minetest.register_ore({
+	ore_type = "scatter",
+	ore = "ground:clay",
+	wherein = "ground:sand",
+	clust_scarcity = 20*20*20,
+	clust_num_ores = 56,
+	clust_size = 4,
+	height_min = -10,
+	height_max = 0,
+})
 minetest.register_node("ground:sandstone", {
 	description = "Sandstone",
 	tiles = {"ground_sandstone.png"},
 	groups = {cracky=3},
 	sounds = mind_mi.stone_sounds,
 })
--- Should darkstone be an ore?
+-- Should darkstone be in ores mod?
 minetest.register_node("ground:darkstone", {
 	description = "Darkstone",
 	tiles = {"ground_darkstone.png"},
