@@ -105,3 +105,10 @@ minetest.register_craft({
 	recipe = {"ores:diamond", "ores:iron_lump", "ores:iron_lump"},
 })
 
+minetest.register_craftitem("ores:bronze_ingot", {
+	description = "Bronze ingot",
+	inventory_image = "ores_ingot_bronze.png",
+})
+
+machines.alloy_furnace.register_alloy('"ores:copper_lump" 3', "ores:tin_lump", '"ores:bronze_ingot" 4')
+
