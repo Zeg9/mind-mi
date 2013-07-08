@@ -98,12 +98,11 @@ minetest.register_craft({
 	burntime = 25,
 })
 
-ores.register_lump_and_ingot("diamond_iron", "Diamond and Iron")
-minetest.register_craft({
-	type = "shapeless",
-	output = '"ores:diamond_iron_lump" 2',
-	recipe = {"ores:diamond", "ores:iron_lump", "ores:iron_lump"},
+minetest.register_craftitem("ores:diamond_iron_ingot", {
+	description = "Iron ingot with diamonds",
+	inventory_image = "ores_ingot_diamond_iron.png",
 })
+machines.alloy_furnace.register_alloy("ores:iron_lump", "ores:diamond", "ores:diamond_iron_ingot")
 
 minetest.register_craftitem("ores:bronze_ingot", {
 	description = "Bronze ingot",
