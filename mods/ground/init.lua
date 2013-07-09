@@ -12,8 +12,8 @@ minetest.register_alias("mapgen_gravel", "ground:gravel")
 minetest.register_alias("mapgen_clay", "ground:sand")
 minetest.register_alias("mapgen_desert_sand", "ground:sand")
 minetest.register_alias("mapgen_desert_stone", "ground:sandstone")
-minetest.register_alias("mapgen_cobble", "ground:cobble") --TODO mossy cobble (with abm of course)
-minetest.register_alias("mapgen_mossycobble", "ground:stone")
+minetest.register_alias("mapgen_cobble", "ground:cobble")
+minetest.register_alias("mapgen_mossycobble", "ground:mossycobble")
 minetest.register_alias("mapgen_water_source", "ground:water_source")
 minetest.register_alias("mapgen_lava_source", "ground:lava_source")
 -- Don't generate trees, they are done in the "trees" mod
@@ -207,6 +207,19 @@ minetest.register_node("ground:sandstone", {
 	tiles = {"ground_sandstone.png"},
 	groups = {cracky=3},
 	sounds = mind_mi.stone_sounds,
+})
+minetest.register_node("ground:sandstone_brick", {
+	description = "Sandstone brick",
+	tiles = {"ground_sandstone_brick.png"},
+	groups = {cracky=3},
+	sounds = mind_mi.stone_sounds,
+})
+minetest.register_craft({
+	output = "ground:sandstone_brick",
+	recipe = {
+		{"ground:sandstone","ground:sandstone"},
+		{"ground:sandstone","ground:sandstone"},
+	},
 })
 -- Should darkstone be in ores mod?
 minetest.register_node("ground:darkstone", {
