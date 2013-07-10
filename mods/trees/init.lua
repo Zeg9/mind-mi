@@ -192,6 +192,8 @@ trees.register_tree("birch", "Birch", {
 ------------
 -- Mapgen --
 ------------
+-- FIXME: rewrite this using get_mapgen_object("heightmap")
+-- Warning: the thing below is DAMN SLOW on mapgen.
 minetest.register_on_generated(function(minp, maxp, seed)
 	if maxp.y < 0 or minp.y > 100 then
 		return -- don't spawn trees below water or above clouds

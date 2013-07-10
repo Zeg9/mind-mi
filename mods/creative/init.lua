@@ -133,10 +133,11 @@ if minetest.setting_getbool("creative_mode") then
 			max_drop_level = 3,
 			groupcaps = {
 				crumbly = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
-				cracky = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+				cracky = {times={[1]=0.5, [2]=0.5, [3]=0.5, [4]=0.5}, uses=0, maxlevel=3},
 				snappy = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
 				choppy = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
 				oddly_breakable_by_hand = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+				creative_only = {times={[1]=0.5}, uses=0, maxlevel=3},
 			},
 			damage_groups = {fleshy = 10},
 		}

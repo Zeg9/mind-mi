@@ -23,4 +23,3 @@ GloopMaster (CC BY-SA):
 Calinou (CC BY-SA):
   default_brick.png
   default_clay_brick.png
-

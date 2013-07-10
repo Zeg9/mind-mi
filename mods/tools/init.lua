@@ -82,6 +82,7 @@ minetest.register_node("tools:torch", {
 	tiles = {"tools_torch_top.png","tools_torch_bottom.png","tools_torch_side.png"},
 	inventory_image = "tools_torch.png",
 	wield_image = "tools_torch.png",
+	wield_light = 13,
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
@@ -101,6 +102,40 @@ minetest.register_craft({
 	recipe = {
 		{"group:coal"},
 		{"trees:stick"},
+	},
+})
+
+minetest.register_node("tools:chest", {
+	description = "Chest",
+	tiles = {
+		"tools_chest_top.png",
+		"tools_chest_top.png",
+		"tools_chest_side.png",
+		"tools_chest_side.png",
+		"tools_chest_side.png",
+		"tools_chest_front.png",
+	},
+	paramtype2 = "facedir",
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8*4)
+		meta:set_string("formspec", "size[8,9]"
+			.. "list[context;main;0,0;8,4;]"
+			.. "list[current_player;main;0,5;8,4;]")
+		meta:set_string("infotext","Chest")
+	end,
+	groups = {choppy=2},
+	sounds = mind_mi.wood_sounds,
+})
+
+-- FIXME: no wood planks yet
+minetest.register_craft({
+	output = "tools:chest",
+	recipe = {
+		{"group:wood","group:wood","group:wood"},
+		{"group:wood",""          ,"group:wood"},
+		{"group:wood","group:wood","group:wood"},
 	},
 })
 
