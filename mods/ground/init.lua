@@ -28,6 +28,32 @@ minetest.register_alias("mapgen_stone_with_coal", "mapgen_stone")
 minetest.register_alias("mapgen_stone_with_iron", "mapgen_stone")
 minetest.register_alias("mapgen_mese", "mapgen_stone")
 
+-----------------------
+-- Biome definitions --
+-----------------------
+minetest.register_biome({
+	name = "normal",
+	node_top = "ground:dirt_with_grass",
+	depth_top = 1,
+	node_filler = "ground:dirt",
+	depth_filler = 2,
+	height_min = 0,
+	height_max = 31000,
+	heat_point = 40.0,
+	humidity_point = 40.0,
+})
+minetest.register_biome({
+	name = "desert",
+	node_top = "ground:sand",
+	depth_top = 3,
+	node_filler = "ground:sandstone",
+	depth_filler = 10,
+	height_min = 5,
+	height_max = 31000,
+	heat_point = 60.0,
+	humidity_point = 20.0,
+})
+
 ------------------
 -- On_generated --
 ------------------
