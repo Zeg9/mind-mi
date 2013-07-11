@@ -28,9 +28,6 @@ minetest.register_alias("mapgen_stone_with_coal", "mapgen_stone")
 minetest.register_alias("mapgen_stone_with_iron", "mapgen_stone")
 minetest.register_alias("mapgen_mese", "mapgen_stone")
 
--- Force mgv7 (are the aliases above still useful?)
-minetest.set_mapgen_params({mgname="v7"})
-
 -----------------------
 -- Biome definitions --
 -----------------------
