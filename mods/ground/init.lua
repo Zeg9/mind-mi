@@ -36,8 +36,8 @@ minetest.register_biome({
 	node_top = "ground:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "ground:dirt",
-	depth_filler = 2,
-	height_min = 0,
+	depth_filler = 1,
+	height_min = 4,
 	height_max = 31000,
 	heat_point = 40.0,
 	humidity_point = 40.0,
@@ -48,37 +48,59 @@ minetest.register_biome({
 	depth_top = 3,
 	node_filler = "ground:sandstone",
 	depth_filler = 10,
-	height_min = 5,
+	height_min = 4,
 	height_max = 31000,
 	heat_point = 60.0,
 	humidity_point = 20.0,
+})
+minetest.register_biome({
+	name = "beach",
+	node_top = "ground:sand",
+	depth_top = 2,
+	node_filler = "ground:sand",
+	depth_filler = 1,
+	height_min = 0,
+	height_max = 4,
+	heat_point = 40.0,
+	humidity_point = 40.0,
+})
+minetest.register_biome({
+	name = "ocean_dirt",
+	node_top = "ground:dirt",
+	depth_top = 1,
+	node_filler = "ground:dirt",
+	depth_filler = 1,
+	height_min = -31000,
+	height_max = 0,
+	heat_point = 40.0,
+	humidity_point = 60.0,
+})
+minetest.register_biome({
+	name = "ocean_sand",
+	node_top = "ground:sand",
+	depth_top = 2,
+	node_filler = "ground:sand",
+	depth_filler = 1,
+	height_min = -31000,
+	height_max = 0,
+	heat_point = 40.0,
+	humidity_point = 60.0,
 })
 
 ------------------
 -- On_generated --
 ------------------
-
-minetest.register_on_generated(function(minp, maxp, seed)
-	local pr = PseudoRandom(seed+12)
-	-- Generate pebbles
-	local pebbles_count = pr:next(0,100)
-	for i=0,pebbles_count do
-		local p = {}
-		p.x = minp.x+pr:next(0,maxp.x-minp.x)
-		p.z = minp.z+pr:next(0,maxp.z-minp.z)
-		for y=minp.y,maxp.y do
-			p.y = y
-			if minetest.get_node(p).name == "ground:dirt_with_grass" then
-				p.y = p.y +1
-				minetest.set_node(p, {name="ground:pebbles"})
-				break
-			end
-		end
-	end
-end)
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = "ground:dirt_with_grass",
+	sidelen = 16,
+	fill_ratio = 0.02,
+	decoration = "ground:pebbles",
+	height = 1,
+})
 
 ----------------------
--- Node definitions --
+-- Node definitions -- TODO: swamp biomes
 ----------------------
 minetest.register_node("ground:stone", {
 	description = "Stone",

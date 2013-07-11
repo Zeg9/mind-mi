@@ -27,4 +27,3 @@ minetest.registered_entities["__builtin:item"].on_step = function(self, dtime)
 	-- TODO: remove item when inside lava, push when inside water
 	--       and maybe, let the user grab it by walking over it
 end
-

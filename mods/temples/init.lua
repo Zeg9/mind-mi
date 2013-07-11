@@ -3,8 +3,8 @@ minetest.register_decoration({
 	deco_type = "schematic",
 	place_on = "ground:sand",
 	sidelen = 80,
-	fill_ratio = 0.00025,
-	--TODO: biomes = (and use mgv7 instead of v6)
+	fill_ratio = 0.000125,
+	biomes = {"desert"},
 	schematic = minetest.get_modpath("temples").."/schems/pyramid.mts",
 	flags = "place_center_x, place_center_z",
 	rotation = "random",
