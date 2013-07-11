@@ -192,8 +192,6 @@ trees.register_tree("birch", "Birch", {
 ------------
 -- Mapgen --
 ------------
--- FIXME: rewrite this using get_mapgen_object("heightmap")
--- Warning: the thing below is DAMN SLOW on mapgen.
 minetest.register_on_generated(function(minp, maxp, seed)
 	if maxp.y < 0 or minp.y > 100 then
 		return -- don't spawn trees below water or above clouds
@@ -201,16 +199,24 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	if trees.max < 1 then
 		return -- if no tree defined (this shouldn't happen)
 	end
+	local heightmap = minetest.get_mapgen_object("heightmap")
+	local biomemap = minetest.get_mapgen_object("biomemap") -- TODO: forest biomes
 	local pr = PseudoRandom(seed+116)
-	local trees_count = pr:next(0,20)
+	local chunksize = {
+		x = maxp.x-minp.x,
+		y = maxp.y-minp.y,
+		z = maxp.z-minp.z,
+	}
+	local trees_max = 20
+	local trees_count = pr:next(0,trees_max)
 	for i=0,trees_count do
 		local treepos = {}
-		treepos.x = minp.x+pr:next(0,maxp.x-minp.x)
-		treepos.z = minp.z+pr:next(0,maxp.z-minp.z)
-		-- There was some pull request in minetest engine, so we could get
-		-- the surface height, but sadly it hasn't been merged (yet?)...
-		for y=minp.y,maxp.y do
-			treepos.y = y
+		treepos.x = minp.x+pr:next(0,chunksize.x)
+		treepos.z = minp.z+pr:next(0,chunksize.z)
+		-- I didn't even ask how to get the index ! (proud)
+		local index = (treepos.x-minp.x) + (treepos.z-minp.z)*chunksize.z
+		treepos.y = heightmap[index]
+		if treepos.y ~= nil then
 			if minetest.get_node(treepos).name == "ground:dirt_with_grass" then
 				local id = pr:next(1,trees.max)
 				local i = 0
